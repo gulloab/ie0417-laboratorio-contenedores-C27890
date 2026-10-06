@@ -1,5 +1,3 @@
-<!-- BORRADOR: reescribe las explicaciones y respuestas con tus propias palabras (el enunciado lo exige) y completa los TODO pendientes. Borra este comentario al terminar. -->
-
 # Parte 1: Verificación de la instalación de Docker
 
 ## Objetivo

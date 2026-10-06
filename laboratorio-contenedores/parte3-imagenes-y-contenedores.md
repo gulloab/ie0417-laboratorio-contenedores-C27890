@@ -300,13 +300,10 @@ exit
 docker stop mi-ubuntu
 ```
 
-**Explicación:** TODO: ¿para qué sirve este comando? (con tus palabras)
+**Explicación:** 
+Después de docker start mi-ubuntu, el contenedor quedó corriendo en segundo plano. Con docker exec -it mi-ubuntu bash solo abriste una shell adicional, y al hacer exit de ella el contenedor siguió activo. Por eso hay que detenerlo explícitamente con docker stop mi-ubuntu. Para documentarlo, puedes explicar que stop apaga el contenedor sin borrarlo, y que se puede reiniciar mientras no se elimine.
 
-**Resultado obtenido:**
 
-```text
-TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/archivo.png))
-```
 
 #### Eliminar el contenedor
 
@@ -314,13 +311,10 @@ TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/
 docker rm mi-ubuntu
 ```
 
-**Explicación:** TODO: ¿para qué sirve este comando? (con tus palabras)
-
+**Explicación:** TO
 **Resultado obtenido:**
 
-```text
-TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/archivo.png))
-```
+
 
 #### Verificar
 
@@ -352,7 +346,7 @@ b54082ea3156   ubuntu    "bash"    2 minutes ago   Exited (0) 2 minutes ago     
 
 ### Reflexión personal
 
-TODO: breve reflexión sobre lo que hiciste en esta parte.
+Entrar al contenedor de Ubuntu en modo interactivo me ayudó a visualizar claramente la diferencia entre una imagen y un contenedor. Es increíble ver cómo en cuestión de segundos tienes un entorno Linux funcional y aislado, sin la pesadez de arrancar una máquina virtual completa. Me hizo entender que la imagen es solo el "molde" inmutable, mientras que el contenedor es el sistema vivo en el que podemos trabajar. 
 
 ### Preguntas de reflexión
 
