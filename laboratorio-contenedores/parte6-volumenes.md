@@ -1,3 +1,5 @@
+<!-- BORRADOR: reescribe las explicaciones y respuestas con tus propias palabras (el enunciado lo exige) y completa los TODO pendientes. Borra este comentario al terminar. -->
+
 # Parte 6: Persistencia con volúmenes
 
 ## Objetivo
@@ -12,12 +14,12 @@ Comprender por qué los datos dentro de un contenedor pueden perderse y cómo lo
 docker volume create datos-lab
 ```
 
-**Explicación:** TODO: ¿para qué sirve este comando? (con tus palabras)
+**Explicación:** Crea un volumen administrado por Docker llamado `datos-lab`; imprime su nombre.
 
 **Resultado obtenido:**
 
 ```text
-TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/archivo.png))
+datos-lab
 ```
 
 ### Listar los volúmenes
@@ -26,12 +28,13 @@ TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/
 docker volume ls
 ```
 
-**Explicación:** TODO: ¿para qué sirve este comando? (con tus palabras)
+**Explicación:** Lista los volúmenes existentes; aparece `datos-lab` con el driver `local`.
 
 **Resultado obtenido:**
 
 ```text
-TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/archivo.png))
+DRIVER    VOLUME NAME
+local     datos-lab
 ```
 
 ### Ejecutar Ubuntu montando el volumen
@@ -40,12 +43,12 @@ TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/
 docker run -it --name contenedor-volumen -v datos-lab:/datos ubuntu bash
 ```
 
-**Explicación:** TODO: ¿para qué sirve este comando? (con tus palabras)
+**Explicación:** Ejecuta un contenedor Ubuntu interactivo y monta el volumen `datos-lab` en la ruta `/datos` del contenedor (`-v datos-lab:/datos`).
 
 **Resultado obtenido:**
 
 ```text
-TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/archivo.png))
+root@ae44ba5c0fa7:/# 
 ```
 
 ### Escribir y leer un archivo en el volumen (dentro del contenedor)
@@ -99,12 +102,12 @@ cat /datos/archivo.txt
 exit
 ```
 
-**Explicación:** TODO: ¿para qué sirve este comando? (con tus palabras)
+**Explicación:** Lee el archivo desde el segundo contenedor, que montó el mismo volumen `datos-lab` en `/datos`.
 
 **Resultado obtenido:**
 
 ```text
-TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/archivo.png))
+Este archivo está en un volumen
 ```
 
 ### Eliminar el segundo contenedor
@@ -113,12 +116,12 @@ TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/
 docker rm contenedor-volumen-2
 ```
 
-**Explicación:** TODO: ¿para qué sirve este comando? (con tus palabras)
+**Explicación:** Elimina el segundo contenedor; imprime su nombre.
 
 **Resultado obtenido:**
 
 ```text
-TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/archivo.png))
+contenedor-volumen-2
 ```
 
 ### Inspeccionar el volumen
@@ -127,26 +130,36 @@ TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/
 docker volume inspect datos-lab
 ```
 
-**Explicación:** TODO: ¿para qué sirve este comando? (con tus palabras)
+**Explicación:** Muestra los detalles del volumen: nombre, driver `local` y dónde guarda Docker los datos en el host (`Mountpoint`).
 
 **Resultado obtenido:**
 
 ```text
-TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/archivo.png))
+[
+    {
+        "CreatedAt": "2026-10-05T21:56:52-06:00",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/datos-lab/_data",
+        "Name": "datos-lab",
+        "Options": null,
+        "Scope": "local"
+    }
+]
 ```
 
 ## Documentación requerida
 
 - **Qué es un volumen**
-  TODO
+  Un espacio de almacenamiento administrado por Docker, independiente del ciclo de vida de los contenedores, que sirve para persistir datos.
 - **Cómo se crea**
-  TODO
+  Con `docker volume create datos-lab`.
 - **Cómo se monta en un contenedor**
-  TODO
+  Con la opción `-v nombre_volumen:ruta_en_contenedor`, por ejemplo `-v datos-lab:/datos`.
 - **Qué pasó con el archivo después de eliminar el primer contenedor**
   TODO
 - **Resultado de `docker volume inspect`**
-  TODO
+  Está copiado arriba: driver `local` y punto de montaje `/var/lib/docker/volumes/datos-lab/_data`, es decir, los datos viven en el host y no dentro de un contenedor.
 
 ## Reflexión personal
 

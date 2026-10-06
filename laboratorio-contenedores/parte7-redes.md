@@ -1,3 +1,5 @@
+<!-- BORRADOR: reescribe las explicaciones y respuestas con tus propias palabras (el enunciado lo exige) y completa los TODO pendientes. Borra este comentario al terminar. -->
+
 # Parte 7: Redes de Docker
 
 ## Objetivo
@@ -12,12 +14,12 @@ Crear una red personalizada y comunicar contenedores entre sí usando nombres.
 docker network create red-lab
 ```
 
-**Explicación:** TODO: ¿para qué sirve este comando? (con tus palabras)
+**Explicación:** Crea una red de Docker (tipo bridge por defecto) llamada `red-lab`; imprime su ID.
 
 **Resultado obtenido:**
 
 ```text
-TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/archivo.png))
+480ddaddf75c641241a9de65b3414148d25cb749faa984637794db97ff780c27
 ```
 
 ### Listar las redes
@@ -26,12 +28,16 @@ TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/
 docker network ls
 ```
 
-**Explicación:** TODO: ¿para qué sirve este comando? (con tus palabras)
+**Explicación:** Lista las redes. Además de las que Docker crea por defecto (`bridge`, `host`, `none`) aparece `red-lab`.
 
 **Resultado obtenido:**
 
 ```text
-TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/archivo.png))
+NETWORK ID     NAME      DRIVER    SCOPE
+f075f1682609   bridge    bridge    local
+22014559ada9   host      host      local
+12da644ac6f6   none      null      local
+480ddaddf75c   red-lab   bridge    local
 ```
 
 ### Ejecutar un contenedor con Nginx
@@ -40,12 +46,21 @@ TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/
 docker run -d --name servidor-web --network red-lab nginx
 ```
 
-**Explicación:** TODO: ¿para qué sirve este comando? (con tus palabras)
+**Explicación:** Ejecuta Nginx en segundo plano (`-d`) con el nombre `servidor-web`, conectado a la red `red-lab`. Como la imagen no estaba en mi máquina, Docker la descargó primero.
 
 **Resultado obtenido:**
 
 ```text
-TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/archivo.png))
+Unable to find image 'nginx:latest' locally
+latest: Pulling from library/nginx
+f1169c633cbc: Downloading [====================>                              ]  13.63MB/33.57MB
+f802f27d954b: Download complete 
+3326c3817340: Download complete 
+46243d3234ed: Download complete 
+afa8dec48454: Download complete 
+2056b40bae09: Download complete 
+37d8c7707e42: Download complete 
+e40088050cb6: Download complete 
 ```
 
 ### Ejecutar un contenedor Ubuntu en la misma red
@@ -125,11 +140,11 @@ TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/
 ## Documentación requerida
 
 - **Qué es una red en Docker**
-  TODO
+  Una red virtual que conecta contenedores entre sí y con el exterior. Docker crea una red `bridge` por defecto y permite crear redes personalizadas.
 - **Qué hace `docker network create`**
-  TODO
+  Crea una red nueva (por defecto de tipo bridge) con el nombre indicado.
 - **Qué significa conectar contenedores a la misma red**
-  TODO
+  Que pueden comunicarse entre sí, incluso usando el nombre del contenedor como dirección.
 - **Qué ocurrió al ejecutar `curl http://servidor-web`**
   TODO
 - **Por qué se pudo usar el nombre `servidor-web`**
