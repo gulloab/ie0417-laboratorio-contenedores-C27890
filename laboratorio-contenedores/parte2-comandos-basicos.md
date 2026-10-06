@@ -90,7 +90,7 @@ CONTAINER ID   IMAGE         COMMAND    CREATED                  STATUS         
 
 ## Reflexión personal
 
-TODO: breve reflexión sobre lo que hiciste en esta parte.
+Ejecutar la imagen hello-world fue una introducción directa y efectiva al flujo de trabajo de Docker. Me permitió observar cómo el sistema descarga automáticamente una imagen de Docker Hub si no existe localmente, crea el contenedor, ejecuta el proceso y finaliza.
 
 ## Preguntas de reflexión
 

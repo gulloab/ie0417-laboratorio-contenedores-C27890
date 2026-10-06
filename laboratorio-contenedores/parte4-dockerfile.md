@@ -218,7 +218,7 @@ Cada comando imprime el nombre del contenedor sobre el que actuó: el primero lo
 
 ### Reflexión personal
 
-TODO: escribe 2 o 3 frases sobre lo que aprendiste al construir la imagen y ejecutarla, y qué fue lo más difícil (por ejemplo, la indentación del código o cómo se relacionan Dockerfile, imagen y contenedor).
+Crear, nombrar e interactuar con mi-ubuntu fue clave para asimilar el ciclo de vida de un contenedor. Modificar un archivo y comprobar que persiste al detener y reiniciar el contenedor me ayudó a entender que la volatilidad ocurre solo al momento de usar el comando de eliminación (rm).
 
 ### Preguntas de reflexión (Parte 6)
 

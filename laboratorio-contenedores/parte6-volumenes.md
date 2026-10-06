@@ -177,7 +177,7 @@ Este archivo está en un volumen
 
 ## Reflexión personal
 
-TODO: breve reflexión sobre lo que hiciste en esta parte.
+Esta fue una de las secciones más reveladoras. Traducir los pasos manuales de instalación a un Dockerfile y usar docker build me hizo comprender cómo Docker estandariza y automatiza el despliegue de software, creando una plantilla reutilizable y portátil.
 
 ## Preguntas de reflexión
 

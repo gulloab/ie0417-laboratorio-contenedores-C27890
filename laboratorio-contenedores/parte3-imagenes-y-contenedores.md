@@ -135,7 +135,7 @@ b54082ea3156   ubuntu    "bash"    41 seconds ago   Exited (0) 29 seconds ago   
 
 ## Reflexión personal
 
-TODO: breve reflexión sobre lo que hiciste en esta parte.
+Entrar de forma interactiva a un contenedor de Ubuntu demostró físicamente la diferencia entre imagen y contenedor. Resulta fascinante ver cómo se levanta un entorno Linux funcional y aislado en cuestión de segundos, compartiendo el kernel del anfitrión sin el peso de una máquina virtual completa.
 
 ## Preguntas de reflexión
 

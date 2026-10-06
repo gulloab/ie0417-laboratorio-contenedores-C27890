@@ -91,7 +91,7 @@ TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/
 
 ## Reflexión personal
 
-TODO: breve reflexión sobre lo que hiciste en esta parte.
+Desarrollar el código de Flask y su archivo requirements.txt sirvió para establecer un caso de uso real. Fue útil preparar el código localmente primero, entendiendo la necesidad de exponer el host en 0.0.0.0 para que luego pueda recibir tráfico desde fuera del contenedor.
 
 ## Preguntas de reflexión
 

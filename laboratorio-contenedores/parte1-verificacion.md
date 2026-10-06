@@ -150,7 +150,7 @@ Management Commands:
 
 ## Reflexión personal
 
-TODO: breve reflexión sobre lo que hiciste en esta parte.
+Confirmar que Docker y su daemon se están ejecutando correctamente en segundo plano es un paso fundamental. Esta verificación inicial evita horas de frustración intentando diagnosticar errores de conexión más adelante en la práctica.
 
 ## Preguntas de reflexión
 

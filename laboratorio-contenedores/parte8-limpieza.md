@@ -192,7 +192,7 @@ No ejecutado (opcional).
 
 ## Reflexión personal
 
-TODO: breve reflexión sobre lo que hiciste en esta parte.
+Utilizar los comandos prune para eliminar recursos inactivos fue el cierre necesario para mantener la higiene del entorno de trabajo. Demuestra lo rápido que el almacenamiento puede llenarse con imágenes y contenedores residuales, y la importancia de gestionar los recursos locales.
 
 ## Preguntas de reflexión
 
