@@ -128,30 +128,27 @@ DEPRECATED: The legacy builder is deprecated and will be removed in a future rel
             Install the buildx component to build images with BuildKit:
             https://docs.docker.com/go/buildx/
 
-Sending build context to Docker daemon  17.37MB
+Sending build context to Docker daemon  6.144kB
 Step 1/7 : FROM python:3.11-slim
-3.11-slim: Pulling from library/python
-Digest: sha256:6f31d6e9ba2b0a787a3f81c37b004155b87b9efa1b771182bd550c1615745be5
-Status: Downloaded newer image for python:3.11-slim
  ---> 6f31d6e9ba2b
 Step 2/7 : WORKDIR /app
- ---> 2218844696db
+ ---> e04878d34d54
 Step 3/7 : COPY requirements.txt .
- ---> 7475b09c55b4
+ ---> f35e6301ab5d
 Step 4/7 : RUN pip install --no-cache-dir -r requirements.txt
 Successfully installed blinker-1.9.0 click-8.5.0 flask-3.1.3 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.4 werkzeug-3.1.9
- ---> e68cb426491b
+ ---> 1ad14bae65e2
 Step 5/7 : COPY . .
- ---> d9e1baf20836
+ ---> 06519ab75fe7
 Step 6/7 : EXPOSE 5000
- ---> 9ebbb1d7aaf1
+ ---> 4e9c9ca70642
 Step 7/7 : CMD ["python", "app.py"]
- ---> dc8d2e34857c
-Successfully built dc8d2e34857c
+ ---> bd63b7942aaf
+Successfully built bd63b7942aaf
 Successfully tagged laboratorio-flask:1.0
 ```
 
-(Salida resumida. Si reconstruyes tras agregar `.dockerignore`, reemplázala por la nueva.)
+(Salida resumida: se omiten las líneas de descarga de pip.) Esta vez la imagen base `python:3.11-slim` ya estaba en mi máquina, por eso no hubo descarga en el Step 1. El contexto de build fue de solo 6.144kB gracias al archivo `.dockerignore`, que excluye la carpeta `.venv`; en la primera construcción, sin ese archivo, el contexto era de 17.37MB.
 
 ### Resultado de `docker images`
 
@@ -161,9 +158,14 @@ docker images
 
 ```text
 IMAGE                   ID             DISK USAGE   CONTENT SIZE   EXTRA
-laboratorio-flask:1.0   dc8d2e34857c        247MB         59.7MB
-python:3.11-slim        6f31d6e9ba2b        200MB         50.8MB
+hello-world:latest      5e2309035332       25.9kB         9.49kB        
+laboratorio-flask:1.0   bd63b7942aaf        222MB         54.3MB        
+nginx:latest            abe47724e466        242MB         66.3MB        
+python:3.11-slim        6f31d6e9ba2b        200MB         50.8MB        
+ubuntu:latest           f144425ff09b        162MB         45.6MB    U   
 ```
+
+La imagen `laboratorio-flask:1.0` ocupa 222MB en disco (54.3MB de contenido), construida sobre la base `python:3.11-slim` (200MB). Las otras imágenes (`hello-world`, `nginx`, `ubuntu`) vienen de otras partes del laboratorio.
 
 ### Ejecución del contenedor
 
@@ -215,8 +217,8 @@ app-lab
 Cada comando imprime el nombre del contenedor sobre el que actuó: el primero lo detuvo y el segundo lo eliminó.
 
 ### Reflexión personal
-En esta parte se logra comprender el Dockerfile y su relación con el contenedor directamente. docker build, es lo que crea la imagen, docker run, lo que crea el contenedor basado en esa imagen previa. Las indentaciones del .py fueron uno de los problemas, ya que no se ejecutaba correctamente. Lo resolví tomando el código y revisando cada linea, de manera que estuviesen bien identadas, según la sintaxis de Python. 
 
+TODO: escribe 2 o 3 frases sobre lo que aprendiste al construir la imagen y ejecutarla, y qué fue lo más difícil (por ejemplo, la indentación del código o cómo se relacionan Dockerfile, imagen y contenedor).
 
 ### Preguntas de reflexión (Parte 6)
 

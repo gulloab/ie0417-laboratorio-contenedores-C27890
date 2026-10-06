@@ -148,6 +148,20 @@ docker volume inspect datos-lab
 ]
 ```
 
+### Verificación adicional de persistencia
+
+```bash
+docker run --rm -v datos-lab:/datos ubuntu cat /datos/archivo.txt
+```
+
+**Explicación:** Crea un contenedor temporal (`--rm` lo elimina al terminar) que monta `datos-lab` y lee el archivo. Sirve para comprobar que el dato sigue en el volumen aunque los contenedores anteriores ya no existan.
+
+**Resultado obtenido:**
+
+```text
+Este archivo está en un volumen
+```
+
 ## Documentación requerida
 
 - **Qué es un volumen**
@@ -157,7 +171,7 @@ docker volume inspect datos-lab
 - **Cómo se monta en un contenedor**
   Con la opción `-v nombre_volumen:ruta_en_contenedor`, por ejemplo `-v datos-lab:/datos`.
 - **Qué pasó con el archivo después de eliminar el primer contenedor**
-  TODO
+  El archivo siguió existiendo: lo leyeron otros contenedores que montaron `datos-lab` (el segundo contenedor y uno temporal con `--rm`), y ambos imprimieron `Este archivo está en un volumen`.
 - **Resultado de `docker volume inspect`**
   Está copiado arriba: driver `local` y punto de montaje `/var/lib/docker/volumes/datos-lab/_data`, es decir, los datos viven en el host y no dentro de un contenedor.
 
@@ -169,19 +183,19 @@ TODO: breve reflexión sobre lo que hiciste en esta parte.
 
 1. **¿Qué problema resuelven los volúmenes?**
 
-   TODO
+   La pérdida de datos: lo que se escribe dentro de un contenedor se pierde al eliminarlo; con un volumen los datos persisten fuera del ciclo de vida del contenedor.
 
 2. **¿El volumen pertenece a un contenedor específico?**
 
-   TODO
+   No. Es independiente: se crea aparte (`docker volume create`) y puede montarse en distintos contenedores.
 
 3. **¿Qué diferencia hay entre eliminar un contenedor y eliminar un volumen?**
 
-   TODO
+   Eliminar un contenedor no toca el volumen ni sus datos; eliminar el volumen borra los datos, aunque ningún contenedor lo use.
 
 4. **¿Para qué casos reales se usarían volúmenes?**
 
-   TODO
+   Bases de datos, archivos subidos por usuarios, logs, configuración persistente y datos compartidos entre contenedores.
 
 
 ---

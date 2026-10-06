@@ -83,7 +83,11 @@ TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/
 - **Cuál puerto pertenece al contenedor**
   El de la derecha (5000, donde escucha Flask dentro del contenedor).
 - **Captura del navegador mostrando la aplicación funcionando**
-  TODO
+  ![localhost:5000](img/parte5-5000.png)
+
+  ![localhost:5000/info](img/parte5-info.png)
+
+  ![localhost:8080](img/parte5-8080.png)
 
 ## Reflexión personal
 
@@ -93,19 +97,19 @@ TODO: breve reflexión sobre lo que hiciste en esta parte.
 
 1. **¿Por qué no basta con que la aplicación escuche en el puerto 5000 dentro del contenedor?**
 
-   TODO
+   Porque el contenedor tiene su propia red aislada y ese puerto solo existe dentro de él. En `docker ps` aparecía `5000/tcp` sin mapeo al host; para llegar desde mi máquina hay que publicar el puerto con `-p`.
 
 2. **¿Qué función cumple el mapeo de puertos?**
 
-   TODO
+   Redirige el tráfico que llega a un puerto del host hacia un puerto del contenedor, y así la aplicación se vuelve accesible desde fuera del contenedor.
 
 3. **¿Cuál es la diferencia entre el puerto del host y el puerto del contenedor?**
 
-   TODO
+   El puerto del host es el que uso desde mi máquina (`localhost:8080`); el del contenedor es en el que realmente escucha la app dentro (5000). Pueden ser distintos, como en `-p 8080:5000`.
 
 4. **¿Qué pasaría si dos contenedores intentan usar el mismo puerto del host?**
 
-   TODO
+   El segundo no podría iniciar: Docker daría un error de que el puerto ya está asignado, porque cada puerto del host solo puede publicarse para un contenedor a la vez.
 
 
 ---
@@ -281,7 +285,7 @@ TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/
 ### Documentación requerida
 
 - **Qué muestra `docker logs`**
-  TODO
+  Lo que el proceso principal del contenedor escribió en su salida estándar hasta ese momento, por ejemplo el arranque de Flask y las peticiones `GET` recibidas.
 - **Para qué sirve `docker logs -f`**
   Para seguir los logs del contenedor en tiempo real: mientras esté abierto, cada petición nueva que recibe la app aparece de inmediato. Se sale con `Ctrl+C`.
 - **Qué tipo de información muestra `docker inspect`**
@@ -297,19 +301,19 @@ TODO: breve reflexión sobre lo que hiciste en esta parte.
 
 1. **¿Por qué los logs son importantes al trabajar con contenedores?**
 
-   TODO
+   Porque un contenedor no tiene interfaz visible; los logs son la forma de ver qué hace la aplicación, detectar errores y comprobar las peticiones (como los `GET` de Flask) sin entrar al contenedor.
 
 2. **¿Qué diferencia hay entre ver logs históricos y logs en tiempo real?**
 
-   TODO
+   `docker logs` muestra lo que ya ocurrió y termina; con `-f` queda abierto y muestra las líneas nuevas conforme llegan.
 
 3. **¿Qué información útil se puede obtener con `docker inspect`?**
 
-   TODO
+   Estado del contenedor, imagen, comando, IP y red, puertos publicados, variables de entorno, montajes y configuración de recursos. Sirve para depurar cómo quedó configurado.
 
 4. **¿Por qué es importante observar el consumo de recursos?**
 
-   TODO
+   Para detectar contenedores que usan demasiada CPU o memoria y dimensionar los recursos. En mi caso `app-logs` usaba 0.02% de CPU y 21.81MiB de memoria.
 
 
 ---
@@ -398,11 +402,13 @@ TODO: pega aquí la salida de la terminal (o enlaza una captura: ![captura](img/
 - **Qué hace la opción `-e`**
   Define una variable de entorno dentro del contenedor al crearlo (`-e NOMBRE=valor`). Aquí `MENSAJE` cambia el texto que muestra la página principal.
 - **Qué cambió en la aplicación**
-  TODO
+  Con `-e MENSAJE="..."` el título de la página principal muestra el texto que pasé en la variable en lugar del mensaje por defecto ("Hola desde Flask en Docker"); en la segunda ejecución mostró el otro mensaje, sin cambiar el código.
 - **Por qué no fue necesario reconstruir la imagen**
   Porque el mensaje no está fijo en la imagen: el código lo lee de una variable de entorno en tiempo de ejecución. Se cambia la configuración al crear el contenedor sin tocar el código ni el Dockerfile.
 - **Capturas o salidas de ambas ejecuciones**
-  TODO
+  ![app-env](img/parte5-env1.png)
+
+  ![app-env-2](img/parte5-env2.png)
 
 ### Reflexión personal
 
@@ -412,16 +418,16 @@ TODO: breve reflexión sobre lo que hiciste en esta parte.
 
 1. **¿Por qué es útil configurar aplicaciones mediante variables de entorno?**
 
-   TODO
+   Permite cambiar el comportamiento sin modificar el código ni reconstruir la imagen.
 
 2. **¿Qué tipo de información podría configurarse así?**
 
-   TODO
+   Mensajes, puertos, URLs, modo debug, nombres de bases de datos y credenciales o claves de API (estas con cuidado).
 
 3. **¿Por qué no es buena práctica guardar contraseñas directamente dentro del código?**
 
-   TODO
+   Porque quedan visibles en el repositorio y en la imagen para cualquiera que tenga acceso, y cambiarlas obliga a modificar el código.
 
 4. **¿Qué ventaja tiene usar la misma imagen con diferentes configuraciones?**
 
-   TODO
+   Se construye y prueba una sola vez y se usa en distintos entornos (desarrollo, pruebas, producción) solo cambiando la configuración, lo que da consistencia.
